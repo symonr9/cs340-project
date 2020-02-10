@@ -1,21 +1,28 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { routes } from 'siteData/routes'
-import { Link } from 'react-router-dom'
+import Header from 'atomicDesign/molecules/Header/Header'
+import Typography from '@material-ui/core/Typography'
+import Container from '@material-ui/core/Container'
 
 const Layout = ({ children }) => {
   return (
-    <div>
-      <header className='App-header'>
-        <Link to={routes.login}>Login</Link>
-        <Link to={routes.newList}>NewList</Link>
-        <Link to={routes.edit}>Edit</Link>
-      </header>
-      {children}
-    </div>
+    <Container fixed>
+      <Typography
+        component='div'
+        style={{ backgroundColor: '#FFF', height: '100vh' }}
+      >
+        <Header />
+        {children}
+      </Typography>
+    </Container>
   )
 }
 
-Layout.propTypes = {}
+Layout.propTypes = {
+  children: PropTypes.oneOfType([
+    PropTypes.node,
+    PropTypes.arrayOf(PropTypes.node)
+  ])
+}
 
 export default Layout

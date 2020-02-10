@@ -1,0 +1,14 @@
+.m__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  background-color: var(--dark-background);
+  padding: 16px;
+  margin: 0;
+  color: var(--white);
+
+  img {
+    height: 100px;
+  }
+}

@@ -20,6 +20,11 @@ function App () {
     },
     {
       exact: true,
+      path: `${routes.edit}`,
+      component: CRUDPage
+    },
+    {
+      exact: false,
       path: `${routes.edit}/:listId`,
       component: CRUDPage
     },
