@@ -1,0 +1,13 @@
+$primaryColor: darkgray;
+$secondaryColor: lightblue;
+
+.searchMoviesDiv{
+    width: 40em;
+    height: 20em;
+    display: flex;
+    overflow-y: scroll;
+}
+
+.searchDiv{
+    float: right;
+}
