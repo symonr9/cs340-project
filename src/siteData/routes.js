@@ -1,12 +1,12 @@
 // Front routes
-
 export const routes = {
   root: '/',
   login: '/login',
   newList: '/new-list ',
   edit: '/edit',
   listDetails: '/details',
-  genres: '/genres'
+  genres: '/genres',
+  profile: '/profile'
 }
 
 // Hosted URL -- Uncomment on build and deploy
