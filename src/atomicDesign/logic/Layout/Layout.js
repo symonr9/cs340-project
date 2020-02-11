@@ -9,7 +9,7 @@ const Layout = ({ children }) => {
     <Container fixed>
       <Typography
         component='div'
-        style={{ backgroundColor: '#FFF', height: '100vh' }}
+        style={{ backgroundColor: '#FFF', minHeight: '100vh' }}
       >
         <Header />
         {children}
