@@ -9,19 +9,24 @@
   padding: 0;
   width: 100%;
 
-  // color: var(--white);
-
   &__logo-title {
     padding: 16px;
-    // background-color: green;
     display: flex;
     width: 100%;
     justify-content: space-around;
     box-sizing: border-box;
+    align-items: center;
 
     h1 {
       color: var(--white);
     }
+  }
+
+  &__site-nav {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    background-color: var(--dark-gray);
   }
 
   img {
