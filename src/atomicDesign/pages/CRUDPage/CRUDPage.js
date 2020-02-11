@@ -8,6 +8,8 @@ import Movie from '../../molecules/Movie.jsx';
 import Search from '../../molecules/Search.jsx';
 import App from 'atomicDesign/logic/App/App.js';
 
+import NavLink from 'atomicDesign/atoms/NavLink/NavLink';
+
 
 class CreateListForm extends React.Component {
   constructor(props) {
