@@ -7,9 +7,11 @@ import Home from 'atomicDesign/pages/Home/Home'
 import Layout from 'atomicDesign/logic/Layout/Layout'
 import List from 'atomicDesign/organisms/List/List'
 import Genres from 'atomicDesign/pages/Genres/Genres'
+import UserPortal from 'atomicDesign/pages/UserPortal/UserPortal'
+import PrivateRoute from 'atomicDesign/logic/PrivateRoute/PrivateRoute'
 
 function App () {
-  const routeList = [
+  const publicRoutes = [
     {
       exact: true,
       path: routes.login,
@@ -22,18 +24,8 @@ function App () {
     },
     {
       exact: true,
-      path: `${routes.edit}`,
-      component: CRUDPage
-    },
-    {
-      exact: true,
       path: routes.genres,
       component: Genres
-    },
-    {
-      exact: false,
-      path: `${routes.edit}/:listId`,
-      component: CRUDPage
     },
     {
       exact: false,
@@ -44,13 +36,35 @@ function App () {
       component: Home
     }
   ]
+
+  const privateRoutes = [
+    {
+      exact: true,
+      path: routes.profile,
+      component: UserPortal
+    },
+    {
+      exact: false,
+      path: `${routes.edit}/:listId`,
+      component: CRUDPage
+    },
+    {
+      exact: true,
+      path: routes.newList,
+      component: CRUDPage
+    }
+  ]
+
   return (
     <div className='App'>
       <BrowserRouter>
         <Layout>
           <Switch>
-            {routeList.map((route, idx) => (
-              <Route key={`${route}.${idx}`} exact {...route} />
+            {privateRoutes.map((privateRoute, index) => (
+              <PrivateRoute key={`private${index}`} {...privateRoute} />
+            ))}
+            {publicRoutes.map((route, idx) => (
+              <Route key={`public ${route}.${idx}`} exact {...route} />
             ))}
           </Switch>
         </Layout>
