@@ -1,17 +1,14 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import LoginForm from 'atomicDesign/organisms/LoginForm/LoginForm'
+import './Login.scss'
 
 const Login = props => {
-  return <div>Login page. 
-    <br/><br/><br/>
-    Username:
-    <input />
-    <br/><br/>
-    Password:
-    <input />
-    <br/><br/>
-    <button>Sign In</button>&nbsp;&nbsp;<button>Create Account</button>
-  </div>
+  return (
+    <div className='p__login'>
+      <LoginForm />
+    </div>
+  )
 }
 
 Login.propTypes = {}

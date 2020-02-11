@@ -10,12 +10,12 @@ export const routes = {
 }
 
 // Hosted URL -- Uncomment on build and deploy
-// export const backedBaseUrl = 'http://flip3.engr.oregonstate.edu:5959'
+// export const backendBaseUrl = 'http://flip3.engr.oregonstate.edu:5959'
 
 // Local URL
-export const backedBaseUrl = 'http://localhost:5959'
+export const backendBaseUrl = 'http://localhost:5959'
 
 //Backend routes (API)
 export const backendRoutes = {
-  search: `${backedBaseUrl}/search`
+  search: `${backendBaseUrl}/search`
 }

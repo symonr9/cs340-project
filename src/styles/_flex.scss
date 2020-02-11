@@ -1,0 +1,59 @@
+// Flex mixins
+
+%flex {
+  display: flex;
+}
+
+@mixin flex {
+  display: flex;
+}
+
+%flex-center {
+  @extend %flex;
+}
+
+@mixin flex-center {
+  @include flex;
+  align-items: center;
+  justify-content: center;
+}
+
+%flex-column {
+  @extend %flex;
+  flex-direction: column;
+}
+
+@mixin flex-column {
+  @include flex;
+  flex-direction: column;
+}
+
+%flex-column-center {
+  @extend %flex-column;
+  align-items: center;
+}
+
+@mixin flex-column-center {
+  @include flex-column;
+  align-items: center;
+}
+
+%flex-row {
+  @extend %flex;
+  flex-direction: row;
+}
+
+@mixin flex-row {
+  @include flex;
+  flex-direction: row;
+}
+
+%flex-space {
+  @extend %flex;
+  justify-content: space-between;
+}
+
+@mixin flex-space {
+  @include flex;
+  justify-content: space-between;
+}
