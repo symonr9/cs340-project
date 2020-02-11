@@ -6,6 +6,7 @@ import CRUDPage from 'atomicDesign/pages/CRUDPage/CRUDPage'
 import Home from 'atomicDesign/pages/Home/Home'
 import Layout from 'atomicDesign/logic/Layout/Layout'
 import List from 'atomicDesign/organisms/List/List'
+import Genres from 'atomicDesign/pages/Genres/Genres'
 
 function App () {
   const routeList = [
@@ -23,6 +24,11 @@ function App () {
       exact: true,
       path: `${routes.edit}`,
       component: CRUDPage
+    },
+    {
+      exact: true,
+      path: routes.genres,
+      component: Genres
     },
     {
       exact: false,

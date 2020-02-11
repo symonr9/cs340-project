@@ -33,11 +33,12 @@ const Header = props => {
         <h1>Listagram</h1>
       </div>
       <nav className={classes.root}>
-        {/* <ButtonGroup fullWidth aria-label='full width outlined button group'>
+        { <ButtonGroup fullWidth aria-label='full width outlined button group'>
           <NavLink to={routes.login} title='Login' />
           <NavLink to={routes.newList} title='New List' />
           <NavLink to={routes.edit} title='Edit List' />
-        </ButtonGroup> */}
+          <NavLink to={routes.genres} title='Genres' />
+        </ButtonGroup> }
         <BottomNavigation
           value={value}
           onChange={(event, newValue) => {
