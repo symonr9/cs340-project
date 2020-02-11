@@ -5,6 +5,7 @@ import Login from 'atomicDesign/pages/Login/Login'
 import CRUDPage from 'atomicDesign/pages/CRUDPage/CRUDPage'
 import Home from 'atomicDesign/pages/Home/Home'
 import Layout from 'atomicDesign/logic/Layout/Layout'
+import List from 'atomicDesign/organisms/List/List'
 
 function App () {
   const routeList = [
@@ -27,6 +28,11 @@ function App () {
       exact: false,
       path: `${routes.edit}/:listId`,
       component: CRUDPage
+    },
+    {
+      exact: false,
+      path: `${routes.listDetails}/:listId`,
+      component: List
     },
     {
       component: Home
