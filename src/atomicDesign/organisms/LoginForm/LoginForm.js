@@ -7,11 +7,10 @@ import './LoginForm.scss'
 const LoginForm = props => {
   return (
     <MDBContainer className='o__login-form'>
-      <MDBRow>
-        <MDBCol />
-        <MDBCol md='8' className='o__login-form__form'>
+      <MDBRow center>
+        <MDBCol md='6' className='o__login-form__form'>
           <form>
-            <SectionTitle title={'Signup'} />
+            <SectionTitle title='Login' />
             <div className='grey-text'>
               <MDBInput
                 label='Type your email'
@@ -35,7 +34,6 @@ const LoginForm = props => {
             </div>
           </form>
         </MDBCol>
-        <MDBCol />
       </MDBRow>
     </MDBContainer>
   )
