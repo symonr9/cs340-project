@@ -1,4 +1,5 @@
 import React from 'react';
+import { MDBInput, MDBBtn } from 'mdbreact';
 import './Movie.scss';
 
 class Movie extends React.Component {
@@ -14,7 +15,7 @@ class Movie extends React.Component {
                <div >
                    <img className="poster"src={Poster} alt="my movie poster"/>
                </div>
-               <button className="addToListBtn">Add to List</button>
+               <MDBBtn className="addToListBtn">Add to List</MDBBtn>
            </div>
        )
    }

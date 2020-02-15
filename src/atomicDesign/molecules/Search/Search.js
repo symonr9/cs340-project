@@ -1,4 +1,6 @@
 import React from 'react';
+import { MDBInput, MDBBtn } from 'mdbreact';
+
 class Search extends React.Component {
    state= {
        title: ''
@@ -18,7 +20,7 @@ class Search extends React.Component {
        return (
            <div>
                <input type="text" onChange={this.handleInputTitle} value={title}/>
-               <input type="submit" onClick={this.handleSubmit} value="Search"/>
+               <MDBBtn type="submit" onClick={this.handleSubmit}>Search</MDBBtn>
            </div>
        )
    }
