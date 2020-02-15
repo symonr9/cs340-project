@@ -2,7 +2,7 @@
 export const routes = {
   root: '/',
   login: '/login',
-  newList: '/new-list ',
+  newList: '/new-list',
   edit: '/edit',
   listDetails: '/details',
   genres: '/genres',

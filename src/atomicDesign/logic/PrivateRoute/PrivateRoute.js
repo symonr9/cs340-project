@@ -22,7 +22,7 @@ const PrivateRoute = ({
 }) => {
   //Mock session
   const sessionData = {
-    session: false
+    session: true
   }
 
   const routeProps = {

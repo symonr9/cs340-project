@@ -1,9 +1,10 @@
 
 
 .movie{
-    width: 10em;
-    height: 10em;
+    width: 14em;
+    height: 15em;
     margin: 0.5em;
+    
 }
 
 .poster{
@@ -12,7 +13,9 @@
 }
 
 .titleYear{
-
+    height: 3em;
+    overflow-y: scroll;
+    overflow-x: hidden;
 }
 
 .title{
