@@ -1,39 +1,15 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-// import { connect } from 'react-redux'
 import { Route, Redirect } from 'react-router-dom'
 import { routes } from 'siteData/routes'
+import { getSession, sessionIsActive } from 'services/sessionStore'
 
-// const mapStateToProps = state => ({
-//   sessionData: state.sessionData,
-//   globalFunctions: state.globalFunctions,
-//   contacts: state.contacts
-// })
-
-// ConnectedPrivateRoute
-
-//Pending redux store
-
-const PrivateRoute = ({
-  component: Component,
-  // sessionData,
-  // globalFunctions,
-  ...rest
-}) => {
-  //Mock session
-  const sessionData = {
-    session: true
-  }
-
+const PrivateRoute = ({ component: Component, ...rest }) => {
   const routeProps = {
     ...rest,
     render: props =>
-      sessionData.session ? (
-        <Component
-          sessionData={sessionData}
-          // globalFunctions={globalFunctions}
-          {...props}
-        />
+      sessionIsActive() ? (
+        <Component sessionData={getSession()} {...props} />
       ) : (
         <Redirect
           to={{
@@ -46,15 +22,8 @@ const PrivateRoute = ({
   return <Route {...routeProps} />
 }
 
-// ConnectedPrivateRoute.propTypes = {
-//   component: PropTypes.func,
-//   sessionData: PropTypes.objectOf(PropTypes.any).isRequired,
-//   contacts: PropTypes.objectOf(PropTypes.string),
-//   exact: PropTypes.bool
-// }
-// ConnectedPrivateRoute.defaultProps = {
-//   exact: false
-// }
-// const PrivateRoute = connect(mapStateToProps)(ConnectedPrivateRoute)
+PrivateRoute.propTypes = {
+  component: PropTypes.func
+}
 
 export default PrivateRoute
