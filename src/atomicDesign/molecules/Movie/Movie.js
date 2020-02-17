@@ -3,9 +3,13 @@ import { MDBInput, MDBBtn } from 'mdbreact';
 import './Movie.scss';
 
 class Movie extends React.Component {
+    constructor(props) {
+        super(props);
+      //  const {Title, Poster, Year} = this.props;
+      }
 
     render() {
-       const {Title, Poster, Year} = this.props;
+      const {Title, Poster, Year, addToList} = this.props;
        return (
            <div className="movie">
                <div className="titleYear">
@@ -15,7 +19,7 @@ class Movie extends React.Component {
                <div >
                    <img className="poster"src={Poster} alt="my movie poster"/>
                </div>
-               <MDBBtn className="addToListBtn">Add to List</MDBBtn>
+               <MDBBtn className="addToListBtn" onClick={addToList(Title)}>Add to List</MDBBtn>
            </div>
        )
    }

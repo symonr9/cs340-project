@@ -13,6 +13,7 @@ class CreateListForm extends React.Component {
 
     this.state = {
       movies: [],
+      listMovies: [],
       listName: 'My New List',
       genre: 'My Genre'
     };
@@ -21,6 +22,7 @@ class CreateListForm extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.sendRequest = this.sendRequest.bind(this);
     this.submitList = this.submitList.bind(this);
+    this.addToList = this.addToList.bind(this);
   }
 
   sendRequest = (title) => {
@@ -38,6 +40,7 @@ class CreateListForm extends React.Component {
       .then(function (data) {
         const movieData = data;
         current.setState({ movies: movieData.Search });
+        console.log(movieData.Search);
       })
       .catch(err => {
         console.log(err);
@@ -58,12 +61,23 @@ class CreateListForm extends React.Component {
     alert("New list submitted!");
   }
 
+  addToList(Title){
+    /*
+    //alert("adding " + Title + " to list!");
+    let arr = this.state.listMovies;
+    arr.push([Title]);
+    this.setState({listMovies: arr});
+    */
+  }
+
   render() {
     return (
       <ListForm 
         submitList={this.submitList}
+        addToList={this.addToList}
         sendRequest={this.sendRequest}
         movies={this.state.movies}
+        listMovies={this.state.listMovies}
         listName={this.state.listName}
         genre={this.state.genre}
       />

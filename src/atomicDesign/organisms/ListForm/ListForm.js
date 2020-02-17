@@ -41,9 +41,14 @@ const ListForm = props => {
                     <div class="searchMoviesDiv">
                             {
                                 props.movies.map((movie) => {
-                                    return <Movie {...movie} />
+                                    return <Movie 
+                                                Title={movie.Title} 
+                                                Year={movie.Year} 
+                                                Poster={movie.Poster}
+                                                Id={movie.imdbId} 
+                                                addToList={props.addToList} />
                                 })
-                            }
+                            } 
                         </div>
                         <MDBCol md='2' className=''>
                             </MDBCol>
@@ -53,7 +58,18 @@ const ListForm = props => {
                 </form>
                 </MDBCol>
                 <MDBCol md='4' className=''>
-                    <ListView movies={props.movies}/>
+                    {props.listMovies.map((movie) => {
+                        return(                        
+                            <Movie 
+                            Title={movie.Title} 
+                            Year={movie.Year} 
+                            Poster={movie.Poster}
+                            Id={movie.imdbId} 
+                            addToList={props.addToList} />
+                        );
+                    })
+                    }
+                    
                 </MDBCol>
             </MDBRow>
         </MDBContainer>
