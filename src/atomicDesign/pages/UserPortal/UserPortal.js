@@ -9,6 +9,7 @@ const UserPortal = props => {
       <MDBRow center className='mytest'>
         <MDBCol md='6' className='o__login-form__form'>
           <UserInfo />
+          user page
         </MDBCol>
       </MDBRow>
     </MDBContainer>

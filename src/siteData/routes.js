@@ -17,5 +17,8 @@ export const backendBaseUrl = 'http://localhost:5959'
 
 //Backend routes (API)
 export const backendRoutes = {
-  search: `${backendBaseUrl}/search`
+  search: `${backendBaseUrl}/search`,
+  login: `${backendBaseUrl}/login`,
+  signup: `${backendBaseUrl}/singup`,
+  logout: `${backendBaseUrl}/logout`
 }
