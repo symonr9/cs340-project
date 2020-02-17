@@ -4,11 +4,7 @@ import PropTypes from 'prop-types';
 import './CRUDPage.scss';
 import unirest from 'unirest';
 
-import Movie from '../../molecules/Movie.jsx';
-import Search from '../../molecules/Search.jsx';
-import App from 'atomicDesign/logic/App/App.js';
-
-import NavLink from 'atomicDesign/atoms/NavLink/NavLink';
+import ListForm from 'atomicDesign/organisms/ListForm/ListForm';
 
 
 class CreateListForm extends React.Component {
@@ -16,12 +12,15 @@ class CreateListForm extends React.Component {
     super(props);
 
     this.state = {
-      movies: []
+      movies: [],
+      listName: 'My New List',
+      genre: 'My Genre'
     };
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.sendRequest = this.sendRequest.bind(this);
+    this.submitList = this.submitList.bind(this);
   }
 
   sendRequest = (title) => {
@@ -55,32 +54,19 @@ class CreateListForm extends React.Component {
     event.preventDefault();
   }
 
+  submitList(event){
+    alert("New list submitted!");
+  }
+
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
-        List Name:<br />
-        <input type="text" value={this.state.listName}/>
-        <br/><br/>
-        Genre Type:<br />
-        <select value={this.state.genre} >
-          <option value="1">Genre 1</option>
-          <option value="2">Genre 2</option>
-          <option value="3">Genre 3</option>
-        </select>
-
-        <div class="searchDiv">
-          <Search handleSendRequest={this.sendRequest} /><br />
-          <div class="searchMoviesDiv">
-            {
-              this.state.movies.map((movie) => {
-                return <Movie {...movie} />
-              })
-            }
-          </div>
-        </div>
-        <br /><br />
-        <input type="submit" value="Submit" />
-      </form>
+      <ListForm 
+        submitList={this.submitList}
+        sendRequest={this.sendRequest}
+        movies={this.state.movies}
+        listName={this.state.listName}
+        genre={this.state.genre}
+      />
     );
   }
 }
