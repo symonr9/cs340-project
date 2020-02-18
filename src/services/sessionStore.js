@@ -7,6 +7,16 @@ export const setSession = sessionData => {
 export const getSession = () =>
   JSON.parse(window.sessionStorage.getItem('session'))
 
+export const removeSession = () => {
+  try {
+    window.sessionStorage.removeItem('session')
+  } catch {
+    console.error(
+      'There seems to be a problem deleting the session. Check the console for more details.'
+    )
+  }
+}
+
 export const sessionIsActive = () => {
   const sessionData = getSession()
   if (sessionData) {

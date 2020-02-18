@@ -1,15 +1,19 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import { Redirect } from 'react-router-dom'
+import { connect } from 'react-redux'
+import { setSessionToStore } from 'services/redux/actions'
 import SectionTitle from 'atomicDesign/atoms/SectionTitle/SectionTitle'
 import { MDBContainer, MDBRow, MDBCol, MDBInput, MDBBtn } from 'mdbreact'
 import './LoginForm.scss'
 import { routes, backendRoutes } from 'siteData/routes'
 import { useObject } from 'services/hooks'
-import { setSession } from 'services/sessionStore'
 import { postData } from 'services/apiCalls'
 
-const LoginForm = props => {
+const mapDispatchToProps = dispatch => ({
+  setSessionToStore: sessionData => dispatch(setSessionToStore(sessionData))
+})
+
+const ConnectedLoginForm = ({ setSessionToStore }) => {
   const { content: state, updateVal } = useObject({
     email: 'steve7@gmail.com',
     password: 'secret again',
@@ -24,7 +28,7 @@ const LoginForm = props => {
         backendRoutes.login,
         body,
         sessionData => {
-          setSession(sessionData)
+          setSessionToStore(sessionData) // To Redux store && local storage
           updateVal('toRedirect', true)
         },
         err => {
@@ -76,7 +80,6 @@ const LoginForm = props => {
     </MDBContainer>
   )
 }
-
-LoginForm.propTypes = {}
+const LoginForm = connect(null, mapDispatchToProps)(ConnectedLoginForm)
 
 export default LoginForm

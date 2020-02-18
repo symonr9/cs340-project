@@ -1,5 +1,4 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import { Redirect } from 'react-router-dom'
 import LoginForm from 'atomicDesign/organisms/LoginForm/LoginForm'
 import SignupForm from 'atomicDesign/organisms/SignupForm/SignupForm'
@@ -9,7 +8,7 @@ import { routes } from 'siteData/routes'
 import { useBool } from 'services/hooks'
 import './Login.scss'
 
-const Login = props => {
+const Login = () => {
   const { val: hasCredentials, toggleVal } = useBool(true)
 
   if (sessionIsActive()) return <Redirect to={routes.profile} />
@@ -26,7 +25,5 @@ const Login = props => {
     </div>
   )
 }
-
-Login.propTypes = {}
 
 export default Login

@@ -6,7 +6,8 @@ export const routes = {
   edit: '/edit',
   listDetails: '/details',
   genres: '/genres',
-  profile: '/profile'
+  profile: '/profile',
+  logout: '/logout'
 }
 
 // Hosted URL -- Uncomment on build and deploy
