@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import Header from 'atomicDesign/molecules/Header/Header'
+import Header from 'atomicDesign/organisms/Header/Header'
 import Typography from '@material-ui/core/Typography'
 import Container from '@material-ui/core/Container'
 

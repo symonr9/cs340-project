@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { backendRoutes } from 'siteData/routes'
 
 /**
  * Performs HTTP GET request to obtain data
@@ -42,4 +43,29 @@ export const postData = (url, body, successCb, errorCb) => {
       console.error(error)
       if (errorCb) errorCb(error)
     })
+}
+
+/**
+ * Default error handler for a form submit
+ * @param {erro} error - Server error object instance
+ * @param {function} callback - Callback of State or hook to handle update
+ */
+
+export const formSubmitServerErrorHandler = (error, callback) => {
+  const errorMessage =
+    error.response && error.response.data ? error.response.data : error.message
+  console.error(error)
+  if (callback) callback(errorMessage)
+}
+
+/**
+ * Default error handler for a form submit
+ * @param {erro} error - Server error object instance
+ * @param {function} callback - Callback of State or hook to handle update
+ */
+
+export const removeServerSession = callback => {
+  postData(backendRoutes.logout, null, callback, error => {
+    formSubmitServerErrorHandler(error)
+  })
 }
