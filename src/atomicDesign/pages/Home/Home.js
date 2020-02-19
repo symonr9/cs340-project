@@ -19,7 +19,7 @@ const useStyles = makeStyles({
   }
 })
 
-const Home = props => {
+const Home = () => {
   const classes = useStyles()
 
   //Filter values
@@ -68,7 +68,5 @@ const Home = props => {
     </div>
   )
 }
-
-Home.propTypes = {}
 
 export default Home

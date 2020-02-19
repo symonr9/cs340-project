@@ -1,9 +1,8 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import UserInfo from 'atomicDesign/organisms/UserInfo/UserInfo'
 import { MDBContainer, MDBRow, MDBCol, MDBInput, MDBBtn } from 'mdbreact'
 
-const UserPortal = props => {
+const UserPortal = () => {
   return (
     <MDBContainer className='p__user-portal'>
       <MDBRow center className='mytest'>
@@ -15,7 +14,5 @@ const UserPortal = props => {
     </MDBContainer>
   )
 }
-
-UserPortal.propTypes = {}
 
 export default UserPortal

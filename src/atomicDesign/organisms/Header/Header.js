@@ -21,7 +21,6 @@ const mapDispatchToProps = dispatch => ({
 
 const ConnectedHeader = ({ sessionData, verifySession, removeSession }) => {
   useEffect(verifySession, [])
-  console.log(sessionData)
   return (
     <header className='m__header'>
       <div className='m__header__logo-title'>
@@ -64,7 +63,9 @@ const ConnectedHeader = ({ sessionData, verifySession, removeSession }) => {
 }
 
 ConnectedHeader.propTypes = {
-  sessionData: PropTypes.object
+  sessionData: PropTypes.object,
+  verifySession: PropTypes.func.isRequired,
+  removeSession: PropTypes.func.isRequired
 }
 
 const Header = connect(mapStateToProps, mapDispatchToProps)(ConnectedHeader)

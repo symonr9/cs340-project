@@ -20,6 +20,6 @@ export const backendBaseUrl = 'http://localhost:5959'
 export const backendRoutes = {
   search: `${backendBaseUrl}/search`,
   login: `${backendBaseUrl}/login`,
-  signup: `${backendBaseUrl}/singup`,
+  signup: `${backendBaseUrl}/signup`,
   logout: `${backendBaseUrl}/logout`
 }

@@ -12,7 +12,7 @@ const rootReducer = (state = initialState, action) => {
     return { ...state, sessionData: null }
   }
   if (action.type === VERIFY_SESSION) {
-    return { ...state, sessionData: { ...action.payload } }
+    return state
   }
   return state
 }

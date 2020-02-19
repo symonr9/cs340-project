@@ -5,6 +5,7 @@ import {
   sessionIsActive,
   getSession
 } from 'services/sessionStore'
+import { removeServerSession } from 'services/apiCalls'
 
 export function handleSessionStorage ({ dispatch }) {
   return next => {
@@ -15,7 +16,13 @@ export function handleSessionStorage ({ dispatch }) {
         setSession(action.payload)
       }
       if (action.type === REMOVE_SESSION) {
-        removeSession() //From local sessionstorage
+        //Removes server session
+        removeServerSession(
+          //Promise. On success, removes local session
+          () => {
+            removeSession()
+          }
+        )
       }
       if (action.type === VERIFY_SESSION) {
         if (sessionIsActive()) {

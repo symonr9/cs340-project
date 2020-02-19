@@ -1,13 +1,19 @@
 import React from 'react'
-import { Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { setSessionToStore } from 'services/redux/actions'
 import SectionTitle from 'atomicDesign/atoms/SectionTitle/SectionTitle'
-import { MDBContainer, MDBRow, MDBCol, MDBInput, MDBBtn } from 'mdbreact'
+import {
+  MDBContainer,
+  MDBRow,
+  MDBCol,
+  MDBInput,
+  MDBBtn,
+  MDBAlert
+} from 'mdbreact'
 import './LoginForm.scss'
-import { routes, backendRoutes } from 'siteData/routes'
+import { backendRoutes } from 'siteData/routes'
 import { useObject } from 'services/hooks'
-import { postData } from 'services/apiCalls'
+import { postData, formSubmitServerErrorHandler } from 'services/apiCalls'
 
 const mapDispatchToProps = dispatch => ({
   setSessionToStore: sessionData => dispatch(setSessionToStore(sessionData))
@@ -15,30 +21,25 @@ const mapDispatchToProps = dispatch => ({
 
 const ConnectedLoginForm = ({ setSessionToStore }) => {
   const { content: state, updateVal } = useObject({
-    email: 'steve7@gmail.com',
-    password: 'secret again',
-    toRedirect: false
+    email: '',
+    password: '',
+    errorMessage: null
   })
+  const { email, password, errorMessage } = state
 
   const handleSubmit = () => {
-    const { email, password } = state
-    if (email && email.length > 0 && password && password.length > 0) {
+    if (loginValidation(email, password)) {
+      updateVal('errorMessage', null) // If all is good, clear errors
       const body = { email, password }
-      postData(
-        backendRoutes.login,
-        body,
-        sessionData => {
-          setSessionToStore(sessionData) // To Redux store && local storage
-          updateVal('toRedirect', true)
-        },
-        err => {
-          console.error(err)
-        }
-      )
+      postData(backendRoutes.login, body, setSessionToStore, error => {
+        //Handles error message
+        formSubmitServerErrorHandler(error, msg => {
+          updateVal('errorMessage', msg)
+        })
+      })
     }
   }
 
-  if (state.toRedirect) return <Redirect to={routes.profile} />
   return (
     <MDBContainer className='o__login-form'>
       <MDBRow center>
@@ -54,7 +55,7 @@ const ConnectedLoginForm = ({ setSessionToStore }) => {
                 validate
                 error='wrong'
                 success='right'
-                value={state.email}
+                value={email}
                 onChange={event => {
                   updateVal('email', event.target.value)
                 }}
@@ -65,12 +66,13 @@ const ConnectedLoginForm = ({ setSessionToStore }) => {
                 group
                 type='password'
                 validate
-                value={state.password}
+                value={password}
                 onChange={event => {
                   updateVal('password', event.target.value)
                 }}
               />
             </div>
+            {errorMessage && <MDBAlert color='danger'>{errorMessage}</MDBAlert>}
             <div className='text-center'>
               <MDBBtn onClick={handleSubmit}>Login</MDBBtn>
             </div>
@@ -80,6 +82,11 @@ const ConnectedLoginForm = ({ setSessionToStore }) => {
     </MDBContainer>
   )
 }
+
+function loginValidation (email, password) {
+  return email && email.length > 0 && password && password.length > 0
+}
+
 const LoginForm = connect(null, mapDispatchToProps)(ConnectedLoginForm)
 
 export default LoginForm

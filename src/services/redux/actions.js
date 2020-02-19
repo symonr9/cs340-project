@@ -6,6 +6,6 @@ export const setSessionToStore = payload => {
 export const removeSession = payload => {
   return { type: REMOVE_SESSION, payload }
 }
-export const verifySession = payload => {
-  return { type: VERIFY_SESSION, payload }
+export const verifySession = () => {
+  return { type: VERIFY_SESSION }
 }
