@@ -106,8 +106,8 @@ const List = props => {
   return (
     <div className={classes.root}>
       <GridList cellHeight={180} className={classes.gridList}>
-        {tileData.map(tile => (
-          <GridListTile key={tile.img}>
+        {tileData.map((tile, index) => (
+          <GridListTile key={index}>
             <img src={tile.img} alt={tile.title} />
             <GridListTileBar
               title={tile.title}

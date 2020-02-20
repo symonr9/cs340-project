@@ -1,6 +1,4 @@
 import React, { useState } from 'react'
-import PropTypes from 'prop-types'
-
 //To get API Data -- during this phased of the project. Lists will be mocked with API data.
 // next project version, this will be replaced with the local relational database data
 import { getData } from 'services/apiCalls'
@@ -21,7 +19,7 @@ const useStyles = makeStyles({
   }
 })
 
-const Home = props => {
+const Home = () => {
   const classes = useStyles()
 
   //Filter values
@@ -57,7 +55,7 @@ const Home = props => {
         </BottomNavigation>
       </div>
       <div>
-        <SectionTitle title='Greates lists' />
+        <SectionTitle title='Greatest lists' />
         <input
           type='text'
           placeholder='Movie name'
@@ -70,7 +68,5 @@ const Home = props => {
     </div>
   )
 }
-
-Home.propTypes = {}
 
 export default Home

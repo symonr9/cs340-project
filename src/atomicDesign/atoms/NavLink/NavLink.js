@@ -15,11 +15,16 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-const NavLink = ({ to, title, styleClass, variant, color }) => {
+const NavLink = ({ to, title, styleClass, variant, color, action }) => {
   const classes = useStyles()
   return (
     <Link className={styleClass} to={to}>
-      <Button className={classes.root} variant={variant} color={color}>
+      <Button
+        className={classes.root}
+        variant={variant}
+        color={color}
+        onClick={action}
+      >
         {title}
       </Button>
     </Link>
@@ -39,7 +44,8 @@ NavLink.defaultProps = {
   title: '',
   styleClass: 'a__nav-link',
   variant: 'contained',
-  color: 'primary'
+  color: 'primary',
+  action: () => null
 }
 
 export default NavLink
