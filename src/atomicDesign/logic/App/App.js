@@ -6,71 +6,72 @@ import CRUDPage from 'atomicDesign/pages/CRUDPage/CRUDPage'
 import Home from 'atomicDesign/pages/Home/Home'
 import Layout from 'atomicDesign/logic/Layout/Layout'
 import List from 'atomicDesign/organisms/List/List'
+import ListDetails from 'atomicDesign/organisms/ListDetails/ListDetails'
 import Genres from 'atomicDesign/pages/Genres/Genres'
 import UserPortal from 'atomicDesign/pages/UserPortal/UserPortal'
 import PrivateRoute from 'atomicDesign/logic/PrivateRoute/PrivateRoute'
 
-function App () {
-  const publicRoutes = [
-    {
-      exact: true,
-      path: routes.login,
-      component: Login
-    },
-    {
-      exact: true,
-      path: routes.newList,
-      component: CRUDPage
-    },
-    {
-      exact: true,
-      path: routes.genres,
-      component: Genres
-    },
-    {
-      exact: false,
-      path: `${routes.listDetails}/:listId`,
-      component: List
-    },
-    {
-      component: Home
-    }
-  ]
+function App() {
+	const publicRoutes = [
+		{
+			exact: true,
+			path: routes.login,
+			component: Login,
+		},
+		{
+			exact: true,
+			path: routes.newList,
+			component: CRUDPage,
+		},
+		{
+			exact: true,
+			path: routes.genres,
+			component: Genres,
+		},
+		{
+			exact: false,
+			path: `${routes.listDetails}/:listId`,
+			component: ListDetails,
+		},
+		{
+			component: Home,
+		},
+	]
 
-  const privateRoutes = [
-    {
-      exact: true,
-      path: routes.profile,
-      component: UserPortal
-    },
-    {
-      exact: false,
-      path: `${routes.edit}/:listId`,
-      component: CRUDPage
-    },
-    {
-      exact: true,
-      path: routes.newList,
-      component: CRUDPage
-    }
-  ]
+	const privateRoutes = [
+		{
+			exact: true,
+			path: routes.profile,
+			component: UserPortal,
+		},
+		{
+			exact: false,
+			path: `${routes.edit}/:listId`,
+			component: CRUDPage,
+		},
+		{
+			exact: true,
+			path: routes.newList,
+			component: CRUDPage,
+		},
+	]
 
-  return (
-    <div className='App'>
-      <BrowserRouter>
-        <Layout>
-          <Switch>
-            {privateRoutes.map((privateRoute, index) => (
-              <PrivateRoute key={`private${index}`} {...privateRoute} />
-            ))}
-            {publicRoutes.map((route, idx) => (
-              <Route key={`public ${route}.${idx}`} exact {...route} />
-            ))}
-          </Switch>
-        </Layout>
-      </BrowserRouter>
-    </div>
-  )
+	return (
+		<div className="App">
+			<BrowserRouter>
+				<Layout>
+					<Switch>
+						{privateRoutes.map((privateRoute, index) => (
+							<PrivateRoute key={`private${index}`} {...privateRoute} />
+						))}
+						{publicRoutes.map((route, idx) => (
+							<Route key={`public ${route}.${idx}`} exact {...route} />
+						))}
+					</Switch>
+				</Layout>
+			</BrowserRouter>
+		</div>
+	)
 }
 
 export default App

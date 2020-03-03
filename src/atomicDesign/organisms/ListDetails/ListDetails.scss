@@ -1,0 +1,36 @@
+.o__list-details {
+	width: 100;
+	margin: 0;
+	padding: 0;
+	display: flex;
+	justify-content: center;
+
+	&__container {
+		width: 100vw;
+		margin: 0;
+		padding: 0;
+		background-color: var(--dark-blue);
+	}
+	.carousel-inner {
+		height: 400px;
+		overflow: hidden;
+	}
+	h1,
+	h2,
+	h3 {
+		color: var(--body-background);
+	}
+
+	&__card-holder {
+		margin: 0;
+		padding: 0;
+		display: flex;
+		flex: wrap;
+		justify-content: center;
+
+		.m__card {
+			margin-left: 15px;
+			min-width: 200px;
+		}
+	}
+}

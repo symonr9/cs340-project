@@ -1,133 +1,99 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-
+import React, { useEffect, useState } from 'react'
+import { Redirect } from 'react-router-dom'
 import { makeStyles } from '@material-ui/core/styles'
 import GridList from '@material-ui/core/GridList'
 import GridListTile from '@material-ui/core/GridListTile'
 import GridListTileBar from '@material-ui/core/GridListTileBar'
-import ListSubheader from '@material-ui/core/ListSubheader'
 import IconButton from '@material-ui/core/IconButton'
 import InfoIcon from '@material-ui/icons/Info'
+import { routes } from 'siteData/routes'
+import { getData } from 'services/apiCalls'
+import { backendRoutes } from 'siteData/routes'
+import { defaultListImg } from 'siteData/siteConstants'
+import { cssWindowQueries } from 'siteData/siteConstants'
+import Chip from '@material-ui/core/Chip'
+import Media from 'react-media'
 import './List.scss'
-import { orange } from '@material-ui/core/colors'
 
 const useStyles = makeStyles(theme => ({
-  root: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    justifyContent: 'space-around',
-    padding: '16px 16px',
-    height: '100%'
-  },
-  gridList: {
-    maxWidth: 800
-  },
-  icon: {
-    color: 'rgba(255, 255, 255, 0.54)'
-  }
+	root: {
+		display: 'flex',
+		flexWrap: 'wrap',
+		justifyContent: 'space-around',
+		padding: '16px 16px',
+		height: '100%'
+	},
+	gridList: {
+		maxWidth: 800
+	},
+	icon: {
+		color: 'rgba(255, 255, 255, 0.54)'
+	}
 }))
 
-/**
- * The example data is structured as follows:
- *
- * import image from 'path/to/image.jpg';
- * [etc...]
- *
- * const tileData = [
- *   {
- *     img: image,
- *     title: 'Image',
- *     author: 'author',
- *   },
- *   {
- *     [etc...]
- *   },
- * ];
- */
+const List = ({ filter }) => {
+	const classes = useStyles()
+	const [lists, setLists] = useState(null)
+	const [redirect, toRedirect] = useState(null)
 
-const test =
-  'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcScuYhB2GrISQ2BkekInQZB44sl2IZK3wl6wOzEKL5CNOp5yjZs&s'
+	const fetchData = () => {
+		const query = filter === 1 ? 'date' : filter === 2 ? 'likes' : ''
+		getData(`${backendRoutes.allLists}?sort=${query}`, response => {
+			setLists(response)
+		})
+	}
 
-const tileData = [
-  {
-    img: test,
-    title: 'Image',
-    author: 'author'
-  },
-  {
-    img: test,
-    title: 'Image',
-    author: 'author'
-  },
-  {
-    img: test,
-    title: 'Image',
-    author: 'author'
-  },
-  {
-    img: test,
-    title: 'Image',
-    author: 'author'
-  },
-  {
-    img: test,
-    title: 'Image',
-    author: 'author'
-  },
-  {
-    img: test,
-    title: 'Image',
-    author: 'author'
-  },
-  {
-    img: test,
-    title: 'Image',
-    author: 'author'
-  },
-  {
-    img: test,
-    title: 'Image',
-    author: 'author'
-  },
-  {
-    img: test,
-    title: 'Image',
-    author: 'author'
-  },
-  {
-    img: test,
-    title: 'Image',
-    author: 'author'
-  }
-]
+	useEffect(fetchData, [filter])
+	if (redirect) return <Redirect to={redirect} />
+	if (!lists) return null
+	return (
+		<Media queries={cssWindowQueries}>
+			{matches => (
+				<div className={`${classes.root} p__list`}>
+					<GridList
+						cellHeight={180}
+						className={classes.gridList}
+						cols={matches.small ? 1 : 2}
+					>
+						{lists.map((list, index) => {
+							const {
+								owner_name: owner,
+								list_name: listName,
+								items,
+								list_id: listId
+							} = list
 
-const List = props => {
-  const classes = useStyles()
-  return (
-    <div className={classes.root}>
-      <GridList cellHeight={180} className={classes.gridList}>
-        {tileData.map((tile, index) => (
-          <GridListTile key={index}>
-            <img src={tile.img} alt={tile.title} />
-            <GridListTileBar
-              title={tile.title}
-              subtitle={<span>by: {tile.author}</span>}
-              actionIcon={
-                <IconButton
-                  aria-label={`info about ${tile.title}`}
-                  className={classes.icon}
-                >
-                  <InfoIcon />
-                </IconButton>
-              }
-            />
-          </GridListTile>
-        ))}
-      </GridList>
-    </div>
-  )
+							//Verify if there is a first item image. Else, use default list image
+							const imageUrl =
+								items && items.length > 0 ? items[0].image_link : defaultListImg
+							return (
+								<GridListTile
+									key={index}
+									onClick={() => {
+										toRedirect(`${routes.listDetails}/${listId}`)
+									}}
+								>
+									<img src={imageUrl} alt={listName} />
+									<GridListTileBar
+										title={listName}
+										subtitle={<span>by: {owner}</span>}
+										actionIcon={
+											<IconButton
+												aria-label={`info about ${owner}`}
+												className={classes.icon}
+											>
+												{/* <Chip label={genre} color="primary" /> */}
+											</IconButton>
+										}
+									/>
+								</GridListTile>
+							)
+						})}
+					</GridList>
+				</div>
+			)}
+		</Media>
+	)
 }
-
-List.propTypes = {}
 
 export default List
