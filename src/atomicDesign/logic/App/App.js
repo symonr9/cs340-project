@@ -5,55 +5,54 @@ import Login from 'atomicDesign/pages/Login/Login'
 import CRUDPage from 'atomicDesign/pages/CRUDPage/CRUDPage'
 import Home from 'atomicDesign/pages/Home/Home'
 import Layout from 'atomicDesign/logic/Layout/Layout'
-import List from 'atomicDesign/organisms/List/List'
 import ListDetails from 'atomicDesign/organisms/ListDetails/ListDetails'
 import Genres from 'atomicDesign/pages/Genres/Genres'
 import UserPortal from 'atomicDesign/pages/UserPortal/UserPortal'
 import PrivateRoute from 'atomicDesign/logic/PrivateRoute/PrivateRoute'
 
-function App() {
+const App = () => {
 	const publicRoutes = [
 		{
 			exact: true,
 			path: routes.login,
-			component: Login,
+			component: Login
 		},
 		{
 			exact: true,
 			path: routes.newList,
-			component: CRUDPage,
+			component: CRUDPage
 		},
 		{
 			exact: true,
 			path: routes.genres,
-			component: Genres,
+			component: Genres
 		},
 		{
 			exact: false,
 			path: `${routes.listDetails}/:listId`,
-			component: ListDetails,
+			component: ListDetails
 		},
 		{
-			component: Home,
-		},
+			component: Home
+		}
 	]
 
 	const privateRoutes = [
 		{
 			exact: true,
 			path: routes.profile,
-			component: UserPortal,
+			component: UserPortal
 		},
 		{
 			exact: false,
 			path: `${routes.edit}/:listId`,
-			component: CRUDPage,
+			component: CRUDPage
 		},
 		{
 			exact: true,
 			path: routes.newList,
-			component: CRUDPage,
-		},
+			component: CRUDPage
+		}
 	]
 
 	return (

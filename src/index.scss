@@ -1,7 +1,8 @@
-@import "./styles/color-palette";
-@import "./styles/fonts";
+@import './styles/color-palette';
+@import './styles/fonts';
 
 body {
-  font-family: var(--project-font);
-  background-color: var(--body-background);
+	font-family: var(--project-font);
+	background-color: var(--body-background);
+	height: 100%;
 }

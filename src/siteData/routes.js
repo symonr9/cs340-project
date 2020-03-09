@@ -7,7 +7,7 @@ export const routes = {
 	listDetails: '/details',
 	genres: '/genres',
 	profile: '/profile',
-	logout: '/logout',
+	logout: '/logout'
 }
 
 // Hosted URL -- Uncomment on build and deploy
@@ -24,4 +24,6 @@ export const backendRoutes = {
 	logout: `${backendBaseUrl}/logout`,
 	allLists: `${backendBaseUrl}/lists/all`,
 	listDetails: `${backendBaseUrl}/lists`,
+	listsByUser: `${backendBaseUrl}/lists/user?id=`,
+	genres: `${backendBaseUrl}/genres`
 }

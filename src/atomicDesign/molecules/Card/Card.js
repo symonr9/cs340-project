@@ -15,7 +15,6 @@ import FavoriteIcon from '@material-ui/icons/Favorite'
 import ShareIcon from '@material-ui/icons/Share'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 import Rating from 'atomicDesign/atoms/Rating/Rating'
-import Chip from '@material-ui/core/Chip'
 import moment from 'moment'
 
 const useStyles = makeStyles(theme => ({

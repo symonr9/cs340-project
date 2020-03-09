@@ -5,6 +5,7 @@ import { routes } from 'siteData/routes'
 import { getSession, sessionIsActive } from 'services/sessionStore'
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
+	// console.log(object)
 	const routeProps = {
 		...rest,
 		render: props =>
@@ -14,16 +15,20 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
 				<Redirect
 					to={{
 						pathname: routes.login,
-						state: { from: props.location },
+						state: { from: props.location }
 					}}
 				/>
-			),
+			)
 	}
 	return <Route {...routeProps} />
 }
 
 PrivateRoute.propTypes = {
-	component: PropTypes.func,
+	component: PropTypes.oneOfType([
+		PropTypes.func,
+		PropTypes.object,
+		PropTypes.node
+	])
 }
 
 export default PrivateRoute

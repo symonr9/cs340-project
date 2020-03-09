@@ -14,7 +14,7 @@ import {
 	MDBMask,
 	MDBContainer,
 	MDBCol,
-	MDBRow,
+	MDBRow
 } from 'mdbreact'
 import Card from 'atomicDesign/molecules/Card/Card'
 import './ListDetails.scss'
@@ -36,10 +36,10 @@ const ListDetails = ({ match }) => {
 	const {
 		name: listName,
 		date_published: publishDate,
-		number_of_likes: numOfLikes,
-		number_of_dislikes: numOfDislikes,
+		// number_of_likes: numOfLikes,
+		// number_of_dislikes: numOfDislikes,
 		owner_name: owner,
-		listItems,
+		listItems
 	} = listData || {}
 
 	//If no list param or is invalid, redirect to root
@@ -56,7 +56,7 @@ const ListDetails = ({ match }) => {
 					<MDBCol md="4" className={'mt-4 text-center'}>
 						<h3 className="mb-3 h3-responsive">{`published`}</h3>
 						<h3 className="mb-3 h3-responsive">{`${moment(publishDate).format(
-							'M-DD-YYYY',
+							'M-DD-YYYY'
 						)}`}</h3>
 					</MDBCol>
 				</MDBRow>
@@ -73,7 +73,7 @@ const ListDetails = ({ match }) => {
 								const {
 									list_item_id: listItemId,
 									name: itemName,
-									image_link,
+									image_link
 								} = item
 								return (
 									<MDBCarouselItem itemId={idx + 1} key={listItemId}>
@@ -105,7 +105,7 @@ const ListDetails = ({ match }) => {
 }
 
 ListDetails.propTypes = {
-	match: PropTypes.object,
+	match: PropTypes.object
 }
 
 export default ListDetails

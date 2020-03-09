@@ -3,21 +3,19 @@ import PropTypes from 'prop-types'
 import './SectionTitle.scss'
 
 const SectionTitle = ({ title, styleClass }) => {
-  return (
-    <p className={`h5 text-center mb-4 a__section-title ${styleClass}`}>
-      {title}
-    </p>
-  )
+	return (
+		<h5 className={`h5 text-center a__section-title ${styleClass}`}>{title}</h5>
+	)
 }
 
 SectionTitle.propTypes = {
-  title: PropTypes.string,
-  styleClass: PropTypes.string
+	title: PropTypes.string,
+	styleClass: PropTypes.string
 }
 
 SectionTitle.defautlProps = {
-  title: '',
-  styleClass: ''
+	title: '',
+	styleClass: ''
 }
 
 export default SectionTitle
