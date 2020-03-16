@@ -14,7 +14,7 @@
 		"axios": "^0.19.2",
 		"body-parser": "^1.19.0",
 		"bootstrap": "^4.4.1",
-		"jquery": "^1.9.1",
+		"jquery": "^3.4.0",
 		"material": "^0.4.3",
 		"material-components-web": "^4.0.0",
 		"mdbreact": "^4.25.1",
