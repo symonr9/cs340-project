@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import moment from 'moment'
 import PropTypes from 'prop-types'
-import { Redirect } from 'react-router-dom'
+import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
 import { makeStyles } from '@material-ui/core/styles'
 import GridList from '@material-ui/core/GridList'
 import GridListTile from '@material-ui/core/GridListTile'
@@ -11,11 +12,13 @@ import { getData } from 'services/apiCalls'
 import { backendRoutes } from 'siteData/routes'
 import { defaultListImg } from 'siteData/siteConstants'
 import { cssWindowQueries } from 'siteData/siteConstants'
+import EditIcon from '@material-ui/icons/Edit'
+import Button from '@material-ui/core/Button'
 import Media from 'react-media'
 import { Badge } from 'reactstrap'
 import './List.scss'
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles(() => ({
 	root: {
 		display: 'flex',
 		flexWrap: 'wrap',
@@ -28,16 +31,22 @@ const useStyles = makeStyles(theme => ({
 	}
 }))
 
-const List = ({ filter, userId }) => {
+const mapStateToProps = state => ({
+	sessionData: state.sessionData
+})
+
+const ConnectedList = ({ filter, userIsLogged, sessionData }) => {
 	const classes = useStyles()
 	const [lists, setLists] = useState(null)
-	const [redirect, toRedirect] = useState(null)
+
+	const { user_id: userId } = sessionData || {}
 
 	const fetchData = isSubscribed => {
 		const query = filter === 1 ? 'date' : filter === 2 ? 'likes' : 'none'
-		const url = !userId
-			? `${backendRoutes.allLists}?sort=${query}`
-			: `${backendRoutes.listsByUser}${userId}`
+		const url =
+			userIsLogged && userId
+				? `${backendRoutes.listsByUser}${userId}`
+				: `${backendRoutes.allLists}?sort=${query}`
 		getData(url, response => {
 			if (isSubscribed) setLists(response)
 		})
@@ -49,7 +58,6 @@ const List = ({ filter, userId }) => {
 		return () => (isSubscribed = false)
 	}, [filter])
 
-	if (redirect) return <Redirect to={redirect} />
 	if (!lists) return null
 	return (
 		<Media queries={cssWindowQueries}>
@@ -62,6 +70,7 @@ const List = ({ filter, userId }) => {
 					>
 						{lists.map((list, index) => {
 							const {
+								user_id: listOwnerId,
 								owner_name: owner,
 								list_name: listName,
 								items,
@@ -69,30 +78,48 @@ const List = ({ filter, userId }) => {
 								number_of_likes: likes,
 								date_published: publishDate
 							} = list
+							const listDetailUrl = `${routes.listDetails}/${listId}`
+
 							//Verify if there is a first item image. Else, use default list image
 							const imageUrl =
 								items && items.length > 0 ? items[0].image_link : defaultListImg
 							return (
-								<GridListTile
-									key={index}
-									onClick={() => {
-										toRedirect(`${routes.listDetails}/${listId}`)
-									}}
-								>
+								<GridListTile key={index}>
 									<img src={imageUrl} alt={listName} />
 									<GridListTileBar
 										title={listName}
 										subtitle={<span>by: {owner}</span>}
 										actionIcon={
-											<div className="row mx-auto p__list__badge-container">
-												<h6 className="col text-right">
-													<Badge color="">{`${moment(publishDate).format(
-														'MM-DD-YY'
-													)}`}</Badge>
-												</h6>
-												<h6 className="col text-right">
-													<Badge color="primary">{`${likes} likes`}</Badge>
-												</h6>
+											<div className="row mx-auto p__list__badge-container justify-content-between">
+												<div className="col-6 my-auto p-0">
+													{userId && listOwnerId === userId && (
+														<Link
+															className="m-0"
+															href={listDetailUrl}
+															to={`${routes.editList}/${listId}`}
+														>
+															<Button
+																variant="contained"
+																color="secondary"
+																size="small"
+																className={classes.button}
+																startIcon={<EditIcon />}
+															>
+																Edit
+															</Button>
+														</Link>
+													)}
+												</div>
+												<div className="d-flex col-4 flex-column align-items-end p-0 p-md-1">
+													<Link href={listDetailUrl} to={listDetailUrl}>
+														<Badge color="primary">{`${likes} likes`}</Badge>
+													</Link>
+													<Link to={listDetailUrl}>
+														<Badge color="">{`${moment(publishDate).format(
+															'MM-DD-YY'
+														)}`}</Badge>
+													</Link>
+												</div>
 											</div>
 										}
 									/>
@@ -106,14 +133,22 @@ const List = ({ filter, userId }) => {
 	)
 }
 
-List.propTypes = {
-	userId: PropTypes.number,
-	filter: PropTypes.number
+ConnectedList.propTypes = {
+	filter: PropTypes.number,
+	userIsLogged: PropTypes.bool,
+	sessionData: PropTypes.shape({
+		first_name: PropTypes.string,
+		user_id: PropTypes.number.isRequired
+	})
 }
 
-List.defaultProps = {
+ConnectedList.defaultProps = {
 	user: null,
-	filter: 0
+	filter: 0,
+	userIsLogged: false,
+	sessionData: null
 }
+
+const List = connect(mapStateToProps)(ConnectedList)
 
 export default List

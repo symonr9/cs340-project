@@ -40,7 +40,6 @@ export const postData = (url, body, successCb, errorCb) => {
 		.post(url, body, postConfig)
 		.then(response => successCb(response.data))
 		.catch(error => {
-			console.error(error)
 			if (errorCb) errorCb(error)
 		})
 }
@@ -91,7 +90,7 @@ export const deleteRequest = (url, successCb, errorCb) => {
 
 /**
  * Default error handler for a form submit
- * @param {erro} error - Server error object instance
+ * @param {error} error - Server error object instance
  * @param {function} callback - Callback of State or hook to handle update
  */
 
@@ -112,4 +111,22 @@ export const removeServerSession = callback => {
 	postData(backendRoutes.logout, null, callback, error => {
 		formSubmitServerErrorHandler(error)
 	})
+}
+
+/**
+ * Fetches all the genres list
+ * @param {function} callback - Callback of State or hook to handle update
+ * @param {function} callback - OPTIONAL Secondary callback
+ * @param {function} errorHandler - OPTIONAL Function to handle error
+ */
+export const getGenreList = (requestCallback, callback, errorHandler) => {
+	const url = `${backendRoutes.genres}/all`
+	getData(
+		url,
+		response => {
+			requestCallback(response)
+			if (callback) callback()
+		},
+		errorHandler
+	)
 }

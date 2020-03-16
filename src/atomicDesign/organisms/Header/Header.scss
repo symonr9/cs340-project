@@ -1,35 +1,24 @@
 .m__header {
-  display: flex;
-  justify-content: space-between;
-  flex-direction: column;
-  align-items: center;
-  flex-wrap: wrap;
-  background-color: var(--dark-background);
-  margin: 0;
-  padding: 0;
-  width: 100%;
+	&__logo-title {
+		height: 100px;
+		background-color: var(--dark-background);
 
-  &__logo-title {
-    padding: 16px;
-    display: flex;
-    width: 100%;
-    justify-content: space-around;
-    box-sizing: border-box;
-    align-items: center;
+		h1 {
+			color: var(--white);
+		}
+		img {
+			height: 60%;
+		}
+	}
 
-    h1 {
-      color: var(--white);
-    }
-  }
+	.MuiButtonGroup-root {
+		border-radius: 0px;
+	}
 
-  &__site-nav {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    background-color: var(--dark-gray);
-  }
-
-  img {
-    height: 100px;
-  }
+	&__site-nav {
+		flex-wrap: wrap;
+		justify-content: center;
+		background-color: var(--dark-gray);
+		border-radius: 0px;
+	}
 }

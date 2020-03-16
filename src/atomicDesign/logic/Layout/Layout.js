@@ -1,28 +1,24 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import Header from 'atomicDesign/organisms/Header/Header'
-import Typography from '@material-ui/core/Typography'
-import Container from '@material-ui/core/Container'
 
 const Layout = ({ children }) => {
-  return (
-    <Container fixed>
-      <Typography
-        component='div'
-        style={{ backgroundColor: '#FFF', minHeight: '100vh' }}
-      >
-        <Header />
-        {children}
-      </Typography>
-    </Container>
-  )
+	return (
+		<div
+			className="container-md p-0 center "
+			style={{ backgroundColor: '#FFF' }}
+		>
+			<Header />
+			{children}
+		</div>
+	)
 }
 
 Layout.propTypes = {
-  children: PropTypes.oneOfType([
-    PropTypes.node,
-    PropTypes.arrayOf(PropTypes.node)
-  ])
+	children: PropTypes.oneOfType([
+		PropTypes.node,
+		PropTypes.arrayOf(PropTypes.node)
+	])
 }
 
 export default Layout

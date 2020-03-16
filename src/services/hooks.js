@@ -28,6 +28,9 @@ export const useInputText = (initValue = '') => {
 		val: state,
 		setVal: event => {
 			setState(event.target.value)
+		},
+		setStringVal: newValueStr => {
+			setState(newValueStr)
 		}
 	}
 }

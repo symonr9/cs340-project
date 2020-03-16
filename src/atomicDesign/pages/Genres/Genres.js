@@ -10,7 +10,12 @@ import IconButton from '@material-ui/core/IconButton'
 import DeleteIcon from '@material-ui/icons/Delete'
 import { makeStyles } from '@material-ui/core/styles'
 import { backendRoutes } from 'siteData/routes'
-import { getData, postData, deleteRequest, patchData } from 'services/apiCalls'
+import {
+	getGenreList,
+	postData,
+	deleteRequest,
+	patchData
+} from 'services/apiCalls'
 import SectionHeaderLabel from 'atomicDesign/atoms/SectionHeaderLabel/SectionHeaderLabel'
 import { green, orange } from '@material-ui/core/colors'
 import Icon from '@material-ui/core/Icon'
@@ -34,7 +39,7 @@ const useStyles = makeStyles(() => ({
 const Genres = () => {
 	const classes = useStyles()
 
-	//Create genre input
+	//Genre list
 	const [genres, setGenres] = useState(null)
 
 	//Create genre input
@@ -49,17 +54,6 @@ const Genres = () => {
 
 	const handleClose = () => {
 		updateVal('open', false)
-	}
-
-	//Get lists of genres
-	const getGenreList = (isSubscribed, callback) => {
-		const url = `${backendRoutes.genres}/all`
-		getData(url, response => {
-			if (isSubscribed) {
-				setGenres(response)
-			}
-			if (callback) callback()
-		})
 	}
 
 	//Post genre list
@@ -97,16 +91,6 @@ const Genres = () => {
 		)
 	}
 
-	function handleReqSuccess(message) {
-		getGenreList(true, () => {
-			mergeObj({
-				success: true,
-				message,
-				open: true
-			})
-		})
-	}
-
 	function handleReqError(error) {
 		const message =
 			error.response && error.response.data && error.response.data.message
@@ -121,9 +105,31 @@ const Genres = () => {
 		})
 	}
 
+	//Get lists of genres
+	const handleGetGenres = (isSubscribed, callback) => {
+		if (isSubscribed)
+			getGenreList(
+				genres => {
+					setGenres(genres)
+				},
+				callback,
+				handleReqError
+			)
+	}
+
+	function handleReqSuccess(message) {
+		handleGetGenres(true, () => {
+			mergeObj({
+				success: true,
+				message,
+				open: true
+			})
+		})
+	}
+
 	useEffect(() => {
 		let isSubscribed = true
-		getGenreList(isSubscribed)
+		handleGetGenres(isSubscribed)
 		return () => (isSubscribed = false)
 	}, [])
 

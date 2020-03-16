@@ -29,6 +29,11 @@ const App = () => {
 		},
 		{
 			exact: false,
+			path: `${routes.editList}/:listId`,
+			component: CRUDPage
+		},
+		{
+			exact: false,
 			path: `${routes.listDetails}/:listId`,
 			component: ListDetails
 		},
@@ -56,9 +61,9 @@ const App = () => {
 	]
 
 	return (
-		<div className="App">
-			<BrowserRouter>
-				<Layout>
+		<BrowserRouter>
+			<Layout>
+				<div className="App">
 					<Switch>
 						{privateRoutes.map((privateRoute, index) => (
 							<PrivateRoute key={`private${index}`} {...privateRoute} />
@@ -67,9 +72,9 @@ const App = () => {
 							<Route key={`public ${route}.${idx}`} exact {...route} />
 						))}
 					</Switch>
-				</Layout>
-			</BrowserRouter>
-		</div>
+				</div>
+			</Layout>
+		</BrowserRouter>
 	)
 }
 

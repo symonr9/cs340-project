@@ -1,8 +1,9 @@
 @import './styles/color-palette';
 @import './styles/fonts';
 
+html,
 body {
 	font-family: var(--project-font);
-	background-color: var(--body-background);
 	height: 100%;
+	background-color: lightblue;
 }

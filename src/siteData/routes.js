@@ -3,18 +3,15 @@ export const routes = {
 	root: '/',
 	login: '/login',
 	newList: '/new-list',
-	edit: '/edit',
+	editList: '/edit-list',
 	listDetails: '/details',
 	genres: '/genres',
 	profile: '/profile',
 	logout: '/logout'
 }
 
-// Hosted URL -- Uncomment on build and deploy
-// export const backendBaseUrl = 'http://flip3.engr.oregonstate.edu:5959'
-
-// Local URL
-export const backendBaseUrl = 'http://localhost:5959'
+// Hosted URL
+export const backendBaseUrl = process.env.REACT_APP_API
 
 //Backend routes (API)
 export const backendRoutes = {
@@ -25,5 +22,7 @@ export const backendRoutes = {
 	allLists: `${backendBaseUrl}/lists/all`,
 	listDetails: `${backendBaseUrl}/lists`,
 	listsByUser: `${backendBaseUrl}/lists/user?id=`,
-	genres: `${backendBaseUrl}/genres`
+	editList: `${backendBaseUrl}/lists/edit-list`,
+	genres: `${backendBaseUrl}/genres`,
+	genresByListId: `${backendBaseUrl}/genres/by-list-id`
 }
