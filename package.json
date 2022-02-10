@@ -19,7 +19,7 @@
 		"material-components-web": "^4.0.0",
 		"mdbreact": "^4.25.1",
 		"moment": "^2.24.0",
-		"node-sass": "^4.13.1",
+		"node-sass": "^7.0.0",
 		"normalize.css": "^8.0.1",
 		"react": "^16.12.0",
 		"react-bootstrap": "^1.0.0-beta.16",
